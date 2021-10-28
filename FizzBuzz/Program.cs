@@ -7,7 +7,9 @@ namespace FizzBuzz
     {
         static void Fizz15IterationsMethod(int count)
         {
-            for (int i = 1; i < count - 15; i += 15)
+            // ~10кратное ускорение чем простым перебором
+            int i;
+            for (i = 1; i < count - 15; i += 15)
             {
                 Console.Write($"{i}\n" +
                               $"{i + 1}\n" +
@@ -25,11 +27,14 @@ namespace FizzBuzz
                               $"{i + 13}\n" +
                               "FizzBuzz\n");
             }
+            if (i < count)
+                FizzCycleMethod(i, count);
         }
 
-        static void FizzCycleMethod(int count)
+        static void FizzCycleMethod(int i, int count)
         {
-            for (int i = 1; i <= count; i++)
+            // Дорабатываем остаток перебором
+            while (i++ <= count)
             {
                 if (i % 3 == 0 && i % 5 == 0)
                     Console.WriteLine("FizzBuzz");
@@ -45,16 +50,9 @@ namespace FizzBuzz
         {
             var watch = new Stopwatch();
             watch.Start();
-            FizzCycleMethod(1000);
+            Fizz15IterationsMethod(87);
             watch.Stop();
-            var fizzCycleMethodTimer = watch.ElapsedMilliseconds;
-            Console.WriteLine($"Elapsed time {watch.ElapsedMilliseconds}ms");
-            Console.WriteLine("Fizz15IterationsMethod\n");
-            watch.Restart();
-            Fizz15IterationsMethod(1000);
-            watch.Stop();
-            Console.WriteLine($"\nFizz Cycle Method Time: {fizzCycleMethodTimer}ms");
-            Console.WriteLine($"Fizz 15 Iterations Method: {watch.ElapsedMilliseconds}ms");
+            Console.WriteLine($"\nFizz timer: {watch.ElapsedMilliseconds}ms");
         }
     }
 }
