@@ -34,7 +34,7 @@ namespace FizzBuzz
         static void FizzCycleMethod(int i, int count)
         {
             // Дорабатываем остаток перебором
-            while (i++ <= count)
+            while (i++ < count)
             {
                 if (i % 3 == 0 && i % 5 == 0)
                     Console.WriteLine("FizzBuzz");
@@ -50,7 +50,7 @@ namespace FizzBuzz
         {
             var watch = new Stopwatch();
             watch.Start();
-            Fizz15IterationsMethod(87);
+            Fizz15IterationsMethod(100);
             watch.Stop();
             Console.WriteLine($"\nFizz timer: {watch.ElapsedMilliseconds}ms");
         }
